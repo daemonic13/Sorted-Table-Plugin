@@ -1,8 +1,8 @@
-Stupid jQuery Table Sort
-========================
+Sorted Table jQuery Plugin
+===========================
 
-This is a stupid jQuery table sorting plugin. Nothing fancy, nothing really
-impressive. Overall, stupidly simple.
+This is a simple jQuery table sorting plugin. Nothing fancy, nothing really
+impressive. Overall, really simple.
 
 [View the demo here][0]
 
@@ -13,7 +13,7 @@ Example Usage
 
 The JS:
 
-    $("table").stupidtable();
+    $("table").sortedtable();
 
 The HTML:
   
@@ -92,7 +92,7 @@ form "D10", "A40", and sorts them based on the number.
 Now we need to specify how the **alphanum** type will be sorted. To do that, 
 we do the following:
 
-    $("table").stupidtable({
+    $("table").sortedtable({
       "alphanum":function(a,b){
 
         var pattern = "^[A-Z](\\d+)$";
@@ -132,5 +132,9 @@ attribute as the basis of the sort.
 License
 -------
 
-The Stupid jQuery Plugin is licensed under the MIT license. See the LICENSE 
+The Sorted Table jQuery Plugin is licensed under the MIT license. See the LICENSE 
 file for full details.
+
+Credit
+------
+Original Version: https://github.com/joequery/Stupid-Table-Plugin
