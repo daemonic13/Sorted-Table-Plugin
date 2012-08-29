@@ -118,7 +118,7 @@
         theMap = sort_map(column, sortMethod);
       }
 
-      var sortedTRs = $(apply_sort_map(trs, theMap));4
+      var sortedTRs = $(apply_sort_map(trs, theMap));
       
       // Apply icon look
       jThis.siblings().find(".esorticon").remove();
