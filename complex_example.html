@@ -1,11 +1,11 @@
 <html>
   <head>
-    <title>Stupid jQuery table sort</title>
+    <title>Sorted Table jQuery</title>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script type="text/javascript" src="stupidtable.min.js?dev"></script>
+    <script type="text/javascript" src="sortedtable.min.js?dev"></script>
     <script type="text/javascript">
       $(function(){
-          $("table").stupidtable({
+          $("table").sortedtable({
             "date":function(a,b){
               // Get these into date objects for comparison.
               var date_from_string = function(str){
@@ -45,7 +45,7 @@
     </style>
   </head>
   <body>
-    <h1>Stupid jQuery table sort!</h1>
+    <h1>Sorted Table jQuery!</h1>
     <table border="1">
       <thead>
         <tr>
