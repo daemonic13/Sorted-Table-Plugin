@@ -41,6 +41,16 @@ Add a class of "type-DATATYPE" to the th's to make them sortable by that data
 type. If you don't want that column to be sortable, just don't give it a 
 type-DATATYPE class.
 
+Changing Associated Icons
+-------------------------
+
+To change the associated jQueryUI icons used, pass in an options object.
+
+The following properties are available:
+* useicon - true to show icon, false to disable display icon (default: true)
+* iconascending - the icon to show for columns in ascending sort (default: ui-icon-triangle-1-n)
+* icondescending - the icon to show for columns in descending sort (default: ui-icon-triangle-1-s)
+
 Predefined data types
 ---------------------
 
@@ -92,16 +102,17 @@ form "D10", "A40", and sorts them based on the number.
 Now we need to specify how the **alphanum** type will be sorted. To do that, 
 we do the following:
 
-    $("table").sortedtable({
-      "alphanum":function(a,b){
+    $("table").sortedtable({ sortFns : {
+        "alphanum":function(a,b){
 
-        var pattern = "^[A-Z](\\d+)$";
-        var re = new RegExp(pattern);
+          var pattern = "^[A-Z](\\d+)$";
+          var re = new RegExp(pattern);
 
-        var aNum = re.exec(a).slice(1);
-        var bNum = re.exec(b).slice(1);
+          var aNum = re.exec(a).slice(1);
+          var bNum = re.exec(b).slice(1);
 
-        return parseInt(aNum,10) - parseInt(bNum,10);
+          return parseInt(aNum,10) - parseInt(bNum,10);
+        }
       }
     });
 
