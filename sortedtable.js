@@ -13,10 +13,11 @@
         // ==================================================== //
 
         // Merge sort functions with some default sort functions.
+        // use built in sort for string (IE requires undefined)
         sortFns = $.extend( {}, {
             "int":function(a,b) { return parseInt(a, 10) - parseInt(b,10); },
             "float":function(a,b) { return parseFloat(a) - parseFloat(b); },
-            "string": null // use internal sort, faster
+            "string": undefined
         },opts.sortFns);
 
         // Array comparison. See http://stackoverflow.com/a/8618383
