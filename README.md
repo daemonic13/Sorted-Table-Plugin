@@ -45,10 +45,10 @@ Trimming Data
 -------------
 
 By default, the plugin will trim the data (ie: text) that is retrieved from the html.  
-This makes sorting consistent based on the data.  This can be turned off by setting the option trimtabs to false.
+This makes sorting consistent based on the data.  This can be turned off by setting the option trimtext to false.
 
 ie:
-$("table").sortedtable({trimtabs : false});
+$("table").sortedtable({trimtext : false});
 
 Changing Associated Icons
 -------------------------
