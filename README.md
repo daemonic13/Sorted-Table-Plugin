@@ -41,6 +41,15 @@ Add a class of "type-DATATYPE" to the th's to make them sortable by that data
 type. If you don't want that column to be sortable, just don't give it a 
 type-DATATYPE class.
 
+Trimming Data
+-------------
+
+By default, the plugin will trim the data (ie: text) that is retrieved from the html.  
+This makes sorting consistent based on the data.  This can be turned off by setting the option trimtabs to false.
+
+ie:
+$("table").sortedtable({trimtabs : false});
+
 Changing Associated Icons
 -------------------------
 

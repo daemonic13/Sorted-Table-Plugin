@@ -16,11 +16,11 @@
         sortFns = $.extend( {}, {
             "int":function(a,b) { return parseInt(a, 10) - parseInt(b,10); },
             "float":function(a,b) { return parseFloat(a) - parseFloat(b); },
-            "string":function(a,b) { if (a<b) return -1; if (a>b) return +1; return 0; }
+            "string": null // use internal sort, faster
         },opts.sortFns);
 
         // Array comparison. See http://stackoverflow.com/a/8618383
-        var arrays_equal = function(a,b) { return !!a && !!b && !(a<b || b<a); }
+        var arrays_equal = function(a,b) { return !!a && !!b && !(a<b || b<a); };
 
         // Return the resulting indexes of a sort so we can apply
         // this result elsewhere. This returns an array of index numbers.
@@ -39,7 +39,7 @@
                 map.push(index);
             }
             return map;
-        }
+        };
 
         // Apply a sort map to the array.
         var apply_sort_map = function(arr, map) {
@@ -49,7 +49,7 @@
                 clone[newIndex] = arr[i];
             }
             return clone;
-        }
+        };
 
         // Returns true if array is sorted, false otherwise.
         // Checks for both ascending and descending
@@ -59,7 +59,7 @@
             var sorted = arr.slice(0).sort(sort_function);
             // Check if the array is sorted in either direction.
             return arrays_equal(clone, sorted) || arrays_equal(reversed, sorted);
-        }
+        };
 
         // ==================================================== //
         //                  Begin execution!                    //
@@ -98,19 +98,20 @@
 
             // Push either the value of the 'data-order-by' attribute if specified
             // or just the text() value in this column to column[] for comparison.
+            // allow for trimming on the data
             trs.each(function(index,tr) {
                 var e = $(tr).children().eq(i);
-                var order_by = e.attr('data-order-by') || e.text();
+                var order_by = (e.attr('data-order-by')) || (opts.trimtext ? e.text().trim() : e.text());
                 column.push(order_by);
             });
 
             // If the column is already sorted, just reverse the order. The sort
             // map is just reversing the indexes.
+            var theMap = [];
             if (is_sorted_array(column, sortMethod)) {
                 column.reverse();
-                var theMap = [];
-                for (var i=column.length-1; i>=0; i--) {
-                    theMap.push(i);
+                for (var k=column.length-1; k>=0; k--) {
+                    theMap.push(k);
                 }
             }
             else {
@@ -141,14 +142,15 @@
             // conveniently!) enough, .append accomplishes this for us.
             table.find("tbody").append(sortedTRs);
         });
-    }
+    };
     
     $.fn.sortedtable.defaults = {
         icondescending : "ui-icon-triangle-1-s",
         iconascending : "ui-icon-triangle-1-n",
         useicon : true,
+        trimtext : true,
         sortFns : {}
-    }
+    };
 
 })(jQuery);
 
