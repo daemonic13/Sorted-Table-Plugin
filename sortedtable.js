@@ -27,7 +27,8 @@
         // this result elsewhere. This returns an array of index numbers.
         // return[0] = x means "arr's 0th element is now at x"
         var sort_map =  function(arr, sort_function) {
-            var sorted = arr.slice(0).sort(sort_function);
+            var sorted = arr.slice(0);
+            sorted = sort_function ? sorted.sort(sort_function) : sorted.sort();
             var map = [];
             var index = 0;
             for (var i=0; i<arr.length; i++) {
@@ -57,7 +58,8 @@
         var is_sorted_array = function(arr, sort_function) {
             var clone = arr.slice(0);
             var reversed = arr.slice(0).reverse();
-            var sorted = arr.slice(0).sort(sort_function);
+            var sorted = arr.slice(0)
+            var sorted = sort_function ? sorted.sort(sort_function) : sorted.sort();
             // Check if the array is sorted in either direction.
             return arrays_equal(clone, sorted) || arrays_equal(reversed, sorted);
         };
@@ -102,7 +104,7 @@
             // allow for trimming on the data
             trs.each(function(index,tr) {
                 var e = $(tr).children().eq(i);
-                var order_by = (e.attr('data-order-by')) || (opts.trimtext ? e.text().trim() : e.text());
+                var order_by = (e.attr('data-order-by')) || (opts.trimtext ? $.trim(e.text()) : e.text());
                 column.push(order_by);
             });
 
