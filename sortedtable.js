@@ -58,8 +58,8 @@
         var is_sorted_array = function(arr, sort_function) {
             var clone = arr.slice(0);
             var reversed = arr.slice(0).reverse();
-            var sorted = arr.slice(0)
-            var sorted = sort_function ? sorted.sort(sort_function) : sorted.sort();
+            var sorted = arr.slice(0);
+            sorted = sort_function ? sorted.sort(sort_function) : sorted.sort();
             // Check if the array is sorted in either direction.
             return arrays_equal(clone, sorted) || arrays_equal(reversed, sorted);
         };
@@ -68,13 +68,15 @@
         //                  Begin execution!                    //
         // ==================================================== //
         // Do sorting when THs are clicked
-        table.delegate("th", "click", function() {
+        table.on("click", "th", function(e) {
+            // fix bug in browser control (IE, of course)
+            e.stopImmediatePropagation();
             var trs = table.find("tbody tr");
             var i = $(this).index();
             var classes = $(this).attr("class");
             var type = null;
             var jThis = $(this);
-            
+
             // determine type from class
             if (classes) {
                 classes = classes.split(/\s+/);
@@ -92,7 +94,7 @@
                 }
             }
             // Don't attempt to sort if no data type
-            if (!type) { return false; }
+            if (!type) { return; }
 
             var sortMethod = sortFns[type];
 
@@ -107,6 +109,16 @@
                 var order_by = (e.attr('data-order-by')) || (opts.trimtext ? $.trim(e.text()) : e.text());
                 column.push(order_by);
             });
+
+            //getting the current header and check if it was already sorted
+            var th = $( this );
+            var asc = th.hasClass("order-asc");
+
+            //removing the ordered class from all other THs
+            table.find('thead th').removeClass('order-asc order-desc');
+
+            //add the right ordened class
+            th.addClass( asc ? 'order-desc' : 'order-asc' );
 
             // If the column is already sorted, just reverse the order. The sort
             // map is just reversing the indexes.
@@ -146,7 +158,7 @@
             table.find("tbody").append(sortedTRs);
         });
     };
-    
+
     $.fn.sortedtable.defaults = {
         icondescending : "ui-icon-triangle-1-s",
         iconascending : "ui-icon-triangle-1-n",
